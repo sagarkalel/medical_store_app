@@ -1,0 +1,2 @@
+/home/sagarkalel/Desktop/flutter_apps/medical_store_app/android/app/.cxx/Debug/6f675q1x/x86_64/CMakeFiles/edit_cache.dir
+/home/sagarkalel/Desktop/flutter_apps/medical_store_app/android/app/.cxx/Debug/6f675q1x/x86_64/CMakeFiles/rebuild_cache.dir

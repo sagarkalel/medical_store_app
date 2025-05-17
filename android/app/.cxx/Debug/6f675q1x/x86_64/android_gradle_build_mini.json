@@ -1,0 +1,20 @@
+{
+  "buildFiles": [
+    "/home/sagarkalel/flutter/packages/flutter_tools/gradle/src/main/groovy/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/home/sagarkalel/Android/Sdk/cmake/3.22.1/bin/ninja",
+      "-C",
+      "/home/sagarkalel/Desktop/flutter_apps/medical_store_app/android/app/.cxx/Debug/6f675q1x/x86_64",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/home/sagarkalel/Android/Sdk/cmake/3.22.1/bin/ninja",
+    "-C",
+    "/home/sagarkalel/Desktop/flutter_apps/medical_store_app/android/app/.cxx/Debug/6f675q1x/x86_64",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {}
+}

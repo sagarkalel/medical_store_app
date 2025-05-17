@@ -1,0 +1,1 @@
+/home/sagarkalel/Desktop/flutter_apps/medical_store_app/build/app/intermediates/cxx/Debug/6f675q1x/obj/x86_64
