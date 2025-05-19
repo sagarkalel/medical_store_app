@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:medical_store_app/presentation/common_widgets/image_error_container.dart';
 
-import '../../../core/theme/app_colors.dart';
-import '../../../core/theme/text_styles.dart';
-import '../../../core/utils/extensions.dart';
-import '../../../data/models/product_model.dart';
+import '../../core/theme/app_colors.dart';
+import '../../core/theme/text_styles.dart';
+import '../../core/utils/extensions.dart';
+import '../../data/models/product_model.dart';
 
 class ProductCard extends StatelessWidget {
   final ProductModel product;
@@ -36,38 +37,22 @@ class ProductCard extends StatelessWidget {
             // Product image
             Stack(
               children: [
-                ClipRRect(
-                  borderRadius:
-                      const BorderRadius.vertical(top: Radius.circular(12)),
-                  child: product.imageUrls.isNotEmpty
-                      ? Image.asset(
-                          product.imageUrls.first,
-                          height: 80,
-                          width: double.infinity,
-                          fit: BoxFit.cover,
-                          errorBuilder: (context, error, stackTrace) {
-                            return Container(
-                              height: 80,
-                              width: double.infinity,
-                              color: AppColors.background,
-                              child: const Icon(
-                                Icons.image_not_supported,
-                                size: 40,
-                                color: AppColors.textLight,
-                              ),
-                            );
-                          },
-                        )
-                      : Container(
-                          height: 150,
-                          width: double.infinity,
-                          color: AppColors.background,
-                          child: const Icon(
-                            Icons.image_not_supported,
-                            size: 40,
-                            color: AppColors.textLight,
-                          ),
-                        ),
+                SizedBox(
+                  height: 100,
+                  child: ClipRRect(
+                    borderRadius:
+                        const BorderRadius.vertical(top: Radius.circular(12)),
+                    child: product.imageUrls.isNotEmpty
+                        ? Image.asset(
+                            product.imageUrls.first,
+                            height: 110,
+                            width: double.infinity,
+                            fit: BoxFit.cover,
+                            errorBuilder: (_, e, s) =>
+                                ImageErrorContainer(height: 80),
+                          )
+                        : ImageErrorContainer(height: 100),
+                  ),
                 ),
                 if (product.discountPercentage > 0) ...[
                   Positioned(

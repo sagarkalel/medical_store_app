@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:medical_store_app/core/utils/extensions.dart';
+import 'package:medical_store_app/core/utils/validators.dart';
+import 'package:medical_store_app/presentation/common_widgets/image_error_container.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/text_styles.dart';
 import '../../../data/models/product_model.dart';
 import '../../../logic/product/product_cubit.dart';
-import '../../widgets/common/custom_button.dart';
-import '../../widgets/common/custom_text_field.dart';
+import '../../common_widgets/custom_button.dart';
+import '../../common_widgets/custom_text_field.dart';
 
 class AddEditProductScreen extends StatefulWidget {
   final ProductModel? product;
@@ -60,7 +63,17 @@ class _AddEditProductScreenState extends State<AddEditProductScreen> {
       ),
       body: BlocListener<ProductCubit, ProductState>(
         listener: (context, state) {
-          if (state.status == ProductStatus.loaded) {
+          if (state.status == ProductStatus.updated) {
+            context.showSnackBar('Successfully updated!');
+            Navigator.pop(context);
+          } else if (state.status == ProductStatus.deleted) {
+            context.showSnackBar('Successfully delted!');
+            Navigator.pop(context);
+          } else if (state.status == ProductStatus.newAdded) {
+            context.showSnackBar('Successfully added!');
+            Navigator.pop(context);
+          } else if (state.status == ProductStatus.error) {
+            context.showSnackBar(state.errorMessage!);
             Navigator.pop(context);
           }
         },
@@ -102,6 +115,7 @@ class _AddEditProductScreenState extends State<AddEditProductScreen> {
             crossAxisCount: 3,
             crossAxisSpacing: 8,
             mainAxisSpacing: 8,
+            childAspectRatio: 1.2,
           ),
           itemCount: _imagePaths.length + 1,
           itemBuilder: (context, index) {
@@ -116,8 +130,9 @@ class _AddEditProductScreenState extends State<AddEditProductScreen> {
   }
 
   Widget _buildAddImageButton() {
-    return GestureDetector(
+    return InkWell(
       onTap: _pickImages,
+      borderRadius: BorderRadius.circular(8),
       child: Container(
         decoration: BoxDecoration(
           border: Border.all(color: AppColors.primary),
@@ -134,7 +149,12 @@ class _AddEditProductScreenState extends State<AddEditProductScreen> {
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(8),
-          child: Image.asset(imagePath, fit: BoxFit.cover),
+          child: Image.asset(
+            imagePath,
+            fit: BoxFit.cover,
+            height: 120,
+            errorBuilder: (c, _, s) => const ImageErrorContainer(),
+          ),
         ),
         Positioned(
           top: 4,
@@ -161,7 +181,7 @@ class _AddEditProductScreenState extends State<AddEditProductScreen> {
         CustomTextField(
           label: 'Product Name',
           initialValue: _product.name,
-          // validator: Validators.required,
+          validator: Validators.required,
           onChanged: (value) => _product.name = value,
         ),
         const SizedBox(height: 16),
@@ -169,7 +189,7 @@ class _AddEditProductScreenState extends State<AddEditProductScreen> {
           label: 'Description',
           initialValue: _product.description,
           maxLines: 3,
-          // validator: Validators.required,
+          validator: Validators.required,
           onChanged: (value) => _product.description = value,
         ),
         const SizedBox(height: 16),
@@ -180,7 +200,7 @@ class _AddEditProductScreenState extends State<AddEditProductScreen> {
                 label: 'Price',
                 initialValue: _product.price.toString(),
                 keyboardType: TextInputType.number,
-                // validator: Validators.requiredNumber,
+                validator: Validators.requiredNumber,
                 onChanged: (value) => _product.price = double.parse(value),
               ),
             ),
@@ -197,6 +217,61 @@ class _AddEditProductScreenState extends State<AddEditProductScreen> {
           ],
         ),
         // Add more form fields following the same pattern
+
+        const SizedBox(height: 16),
+        Row(
+          children: [
+            Expanded(
+              child: CustomTextField(
+                label: 'Brand',
+                initialValue: _product.brand,
+                validator: Validators.validateBrand,
+                onChanged: (value) => _product.brand = value,
+              ),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: CustomTextField(
+                label: 'Category',
+                initialValue: _product.category,
+                validator: Validators.validateCategory,
+                onChanged: (value) => _product.category = value,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 16),
+        CustomTextField(
+          label: 'Stock Quantity',
+          initialValue: _product.stockQuantity.toString(),
+          keyboardType: TextInputType.number,
+          validator: Validators.validateStockQuantity,
+          onChanged: (value) => _product.stockQuantity = int.parse(value),
+        ),
+        const SizedBox(height: 16),
+        CustomTextField(
+          label: 'Dosage',
+          initialValue: _product.dosage,
+          validator: Validators.validateDosage,
+          maxLines: 2,
+          onChanged: (value) => _product.dosage = value,
+        ),
+        const SizedBox(height: 16),
+        CustomTextField(
+          label: 'Uses',
+          initialValue: _product.uses,
+          validator: Validators.validateUses,
+          maxLines: 3,
+          onChanged: (value) => _product.uses = value,
+        ),
+        const SizedBox(height: 16),
+        CustomTextField(
+          label: 'Side Effects',
+          initialValue: _product.sideEffects,
+          validator: Validators.validateSideEffects,
+          maxLines: 3,
+          onChanged: (value) => _product.sideEffects = value,
+        ),
         const SizedBox(height: 16),
         _buildExpiryDateField(),
         const SizedBox(height: 16),

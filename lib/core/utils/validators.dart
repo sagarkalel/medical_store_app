@@ -1,4 +1,58 @@
 class Validators {
+  static String? required(String? value, {String? fieldName}) {
+    if (value == null || value.trim().isEmpty) {
+      return '${fieldName ?? 'This field'} is required';
+    }
+    return null;
+  }
+
+  static String? requiredNumber(String? value) {
+    if (value == null || value.isEmpty) return 'Required';
+    if (double.tryParse(value) == null) return 'Invalid number';
+    return null;
+  }
+
+  static String? validateCategory(String? value) {
+    return required(value, fieldName: 'Category');
+  }
+
+  static String? validateBrand(String? value) {
+    return required(value, fieldName: 'Brand');
+  }
+
+  static String? validateDosage(String? value) {
+    return required(value, fieldName: 'Dosage');
+  }
+
+  static String? validateUses(String? value) {
+    return required(value, fieldName: 'Uses');
+  }
+
+  static String? validateSideEffects(String? value) {
+    return required(value, fieldName: 'Side Effects');
+  }
+
+  static String? validateStockQuantity(String? value) {
+    if (value == null || value.isEmpty) return 'Stock quantity required';
+    final quantity = int.tryParse(value);
+    if (quantity == null) return 'Invalid number';
+    if (quantity < 0) return 'Cannot be negative';
+    return null;
+  }
+
+  static String? validateDiscount(String? value) {
+    if (value == null || value.isEmpty) return null;
+    final discount = double.tryParse(value);
+    if (discount == null) return 'Invalid percentage';
+    if (discount < 0 || discount > 100) return '0-100% only';
+    return null;
+  }
+
+  static String? validateExpiryDate(DateTime date) {
+    if (date.isBefore(DateTime.now())) return 'Expiry date cannot be in past';
+    return null;
+  }
+
   static String? validateEmail(String? value) {
     if (value == null || value.isEmpty) {
       return 'Email is required';
@@ -66,24 +120,6 @@ class Validators {
       }
     } catch (e) {
       return 'Please enter a valid quantity';
-    }
-    return null;
-  }
-
-  static String? validateDiscount(String? value) {
-    if (value == null || value.isEmpty) {
-      return null; // Discount is optional
-    }
-    try {
-      final discount = double.parse(value);
-      if (discount < 0) {
-        return 'Discount cannot be negative';
-      }
-      if (discount > 100) {
-        return 'Discount cannot exceed 100%';
-      }
-    } catch (e) {
-      return 'Please enter a valid discount percentage';
     }
     return null;
   }

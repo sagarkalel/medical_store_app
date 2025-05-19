@@ -6,7 +6,15 @@ import '../../data/repositories/product_repository.dart';
 
 part 'product_state.dart';
 
-enum ProductStatus { initial, loading, loaded, error }
+enum ProductStatus {
+  initial,
+  loading,
+  loaded,
+  error,
+  updated,
+  newAdded,
+  deleted
+}
 
 class ProductCubit extends Cubit<ProductState> {
   final ProductRepository _productRepository;
@@ -60,7 +68,7 @@ class ProductCubit extends Cubit<ProductState> {
       await _productRepository.addProduct(product);
       final products = _productRepository.getAllProducts();
       emit(state.copyWith(
-        status: ProductStatus.loaded,
+        status: ProductStatus.newAdded,
         products: products,
         errorMessage: null,
       ));
@@ -79,7 +87,7 @@ class ProductCubit extends Cubit<ProductState> {
       await _productRepository.updateProduct(product);
       final products = _productRepository.getAllProducts();
       emit(state.copyWith(
-        status: ProductStatus.loaded,
+        status: ProductStatus.updated,
         products: products,
         selectedProduct: product,
         errorMessage: null,
@@ -99,7 +107,7 @@ class ProductCubit extends Cubit<ProductState> {
       await _productRepository.deleteProduct(id);
       final products = _productRepository.getAllProducts();
       emit(state.copyWith(
-        status: ProductStatus.loaded,
+        status: ProductStatus.deleted,
         products: products,
         selectedProduct: null,
         errorMessage: null,

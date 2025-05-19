@@ -8,8 +8,8 @@ import 'package:medical_store_app/core/theme/text_styles.dart';
 import 'package:medical_store_app/core/utils/extensions.dart';
 import 'package:medical_store_app/logic/auth/auth_cubit.dart';
 import 'package:medical_store_app/presentation/animations/fade_animation.dart';
-import 'package:medical_store_app/presentation/widgets/common/custom_button.dart';
-import 'package:medical_store_app/presentation/widgets/common/custom_text_field.dart';
+import 'package:medical_store_app/presentation/common_widgets/custom_button.dart';
+import 'package:medical_store_app/presentation/common_widgets/custom_text_field.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

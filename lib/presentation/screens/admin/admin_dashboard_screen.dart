@@ -2,24 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medical_store_app/data/models/product_model.dart';
+import 'package:medical_store_app/presentation/common_widgets/app_drawer.dart';
 import 'package:medical_store_app/presentation/screens/admin/add_edit_product_screen.dart';
-import 'package:medical_store_app/presentation/widgets/common/custom_text_field.dart';
+import 'package:medical_store_app/presentation/common_widgets/custom_text_field.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/text_styles.dart';
 import '../../../logic/product/product_cubit.dart';
-import '../../widgets/common/custom_button.dart';
-import '../../widgets/common/loading_indicator.dart';
-import '../../widgets/common/product_card.dart';
+import '../../common_widgets/custom_button.dart';
+import '../../common_widgets/loading_indicator.dart';
+import '../../common_widgets/product_card.dart';
 
-class ManageProductsScreen extends StatefulWidget {
-  const ManageProductsScreen({super.key});
+class AdminDashboardScreen extends StatefulWidget {
+  const AdminDashboardScreen({super.key});
 
   @override
-  State<ManageProductsScreen> createState() => _ManageProductsScreenState();
+  State<AdminDashboardScreen> createState() => _AdminDashboardScreenState();
 }
 
-class _ManageProductsScreenState extends State<ManageProductsScreen> {
+class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
   final _searchController = TextEditingController();
   String _searchQuery = '';
 
@@ -33,8 +34,7 @@ class _ManageProductsScreenState extends State<ManageProductsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Manage Products'),
-        centerTitle: false,
+        title: const Text('Medical Store'),
         actions: [
           IconButton(
             icon: const Icon(Icons.filter_alt),
@@ -42,6 +42,7 @@ class _ManageProductsScreenState extends State<ManageProductsScreen> {
           ),
         ],
       ),
+      drawer: const AppDrawer(),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
         onPressed: () =>
