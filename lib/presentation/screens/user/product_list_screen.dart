@@ -54,7 +54,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
           slivers: [
             // Collapsible Header
             SliverAppBar(
-              expandedHeight: kToolbarHeight * 1.3,
+              expandedHeight: kToolbarHeight * 1.35,
               floating: true,
               snap: true,
               pinned: false,
@@ -110,7 +110,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
-                      childAspectRatio: 0.9,
+                      childAspectRatio: 0.85,
                       crossAxisSpacing: 8,
                       mainAxisSpacing: 8,
                     ),
@@ -153,7 +153,6 @@ class _ProductListScreenState extends State<ProductListScreen> {
                 'Medical Store',
                 style: Theme.of(context).appBarTheme.titleTextStyle,
               ).animate().fadeIn(duration: 600.ms),
-              const SizedBox(height: 4),
               Text(
                 'Find your medicines & health products',
                 style: TextStyles.bodyMedium,
