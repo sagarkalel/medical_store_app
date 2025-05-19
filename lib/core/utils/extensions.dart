@@ -30,6 +30,13 @@ extension StringExtensions on String {
   String get capitalizeWords => isEmpty
       ? ''
       : split(' ').map((word) => word.capitalizeFirstLetter).join(' ');
+  // String toTitleCase() {
+  //   return split(' ')
+  //       .where((word) => word.isNotEmpty)
+  //       .map((word) =>
+  //           '${word[0].toUpperCase()}${word.substring(1).toLowerCase()}')
+  //       .join(' ');
+  // }
 }
 
 extension DateTimeExtensions on DateTime {
@@ -64,5 +71,5 @@ extension DateTimeExtensions on DateTime {
 
 extension DoubleExtensions on double {
   String get toCurrency =>
-      NumberFormat.currency(symbol: '\$', decimalDigits: 2).format(this);
+      NumberFormat.currency(symbol: 'Rs ', decimalDigits: 2).format(this);
 }

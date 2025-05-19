@@ -34,6 +34,7 @@ class AppTheme {
         foregroundColor: Colors.white,
         elevation: 2,
         centerTitle: true,
+        titleTextStyle: TextStyles.heading2,
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
@@ -61,7 +62,8 @@ class AppTheme {
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           foregroundColor: AppColors.primary,
-          textStyle: TextStyles.bodySmall.copyWith(fontWeight: FontWeight.w600),
+          textStyle: TextStyles.bodySmall
+              .copyWith(fontWeight: FontWeight.w600, color: AppColors.primary),
           padding: const EdgeInsets.symmetric(horizontal: 4),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),

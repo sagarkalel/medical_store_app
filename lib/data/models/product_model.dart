@@ -21,25 +21,25 @@ class ProductModel extends HiveObject {
   double discountPercentage;
 
   @HiveField(5)
-  final String brand;
+  String brand;
 
   @HiveField(6)
   List<String> imageUrls;
 
   @HiveField(7)
-  final String category;
+  String category;
 
   @HiveField(8)
-  final int stockQuantity;
+  int stockQuantity;
 
   @HiveField(9)
-  final String dosage;
+  String dosage;
 
   @HiveField(10)
-  final String uses;
+  String uses;
 
   @HiveField(11)
-  final String sideEffects;
+  String sideEffects;
 
   @HiveField(12)
   DateTime expiryDate;

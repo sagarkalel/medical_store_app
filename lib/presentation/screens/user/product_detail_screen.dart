@@ -7,7 +7,7 @@ import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/text_styles.dart';
 import '../../../data/models/product_model.dart';
 import '../../../logic/product/product_cubit.dart';
-import '../../widgets/common/loading_indicator.dart';
+import '../../common_widgets/loading_indicator.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   final String productId;
